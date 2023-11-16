@@ -1,5 +1,9 @@
 package pdi_tur.model.produtos;
 
-public class PacoteViagem{
+import pdi_tur.model.singleton.CSingleton;
+
+public class PacoteViagem extends Hospedagem, CSingleton{
+
+    public PacoteViagem(){}
     
 }
