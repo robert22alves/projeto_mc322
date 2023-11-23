@@ -8,22 +8,13 @@ public class PassagemAerea {
     private ClasseVoo classe;
     private Voo ida;
     private Voo volta;
-    private double tarifaAdulto;
-    private double tarifaCrianca; // < 12 anos
-    private double tarifaBebe; // < 2 anos
-    private double imposto;
     private Bagagens bagagens;
 
-    public PassagemAerea(String companhiaAerea, ClasseVoo classe, Voo ida, Voo volta, double tarifaAdulto,
-            double tarifaCrianca, double tarifaBebe, double imposto, Bagagens bagagens) {
+    public PassagemAerea(String companhiaAerea, ClasseVoo classe, Voo ida, Voo volta, Bagagens bagagens) {
         this.companhiaAerea = companhiaAerea;
         this.classe = classe;
         this.ida = ida;
         this.volta = volta;
-        this.tarifaAdulto = tarifaAdulto;
-        this.tarifaCrianca = tarifaCrianca;
-        this.tarifaBebe = tarifaBebe;
-        this.imposto = imposto;
         this.bagagens = bagagens;
     }
 
@@ -121,22 +112,6 @@ public class PassagemAerea {
 
     public Voo getVolta() {
         return volta;
-    }
-
-    public double getTarifaAdulto() {
-        return tarifaAdulto;
-    }
-
-    public double getTarifaCrianca() {
-        return tarifaCrianca;
-    }
-
-    public double getTarifaBebe() {
-        return tarifaBebe;
-    }
-
-    public double getImposto() {
-        return imposto;
     }
 
     public Bagagens getBagagens() {
