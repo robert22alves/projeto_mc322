@@ -1,31 +1,25 @@
 package pdi_tur.model.pessoas;
 
-public class Usuario {
-    
-    private final int nivelAcesso;
-    private String usuario;
-    private String senha;
+public class Usuario extends AbstractPessoa implements NotifReserva{
+	private int qtd;
 
-    public Usuario(String usuario, String senha, int nivelAcesso) {
-        this.usuario = usuario;
-        this.senha = senha;
-        this.nivelAcesso = nivelAcesso;
-    }
+	public Usuario(String usuario, String senha, int nivelAcesso, int qtd) {
+		super(usuario, senha, nivelAcesso);
+		this.qtd = qtd;
+	}
 
-    public int getNivelacesso() {
-        return nivelAcesso;
-    }
+	public int getQtd() {
+		return qtd;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-    
+	public void permissoes() {
+		System.out.println("navegar pelo sistema, visualizar informações detalhadas sobre pacotes\r\n"
+				+ "e destinos, e fazer reservas.");
+	}
+	
+	
 }
