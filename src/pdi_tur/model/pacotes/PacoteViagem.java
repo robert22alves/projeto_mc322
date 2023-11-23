@@ -5,7 +5,7 @@ import pdi_tur.model.hospedagem.Hospedagem;
 import pdi_tur.model.hospedagem.Quarto;
 import pdi_tur.model.passagemAerea.PassagemAerea;
 
-public class PacoteViagem implements Reservaveis{
+public abstract class PacoteViagem implements Reservaveis{
     private PassagemAerea passagemAerea;
     private Hospedagem hospedagem;
     private Quarto quarto;
