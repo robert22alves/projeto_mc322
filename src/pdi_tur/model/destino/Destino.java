@@ -9,5 +9,12 @@ public class Destino{
         this.destino = destino;
     }
 
-    
+    public String getDestino(){
+        return destino;
+    }
+
+    public CategoriasDestino getCategoria(){
+        return categoria;
+    }
+
 }
