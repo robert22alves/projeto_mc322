@@ -1,5 +1,6 @@
 package pdi_tur.model.pacotes;
 
+import java.util.ArrayList;
 import pdi_tur.model.pessoas.Usuario;
 
 public class ListaReservas<T extends Reservaveis> {

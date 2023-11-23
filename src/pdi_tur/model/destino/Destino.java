@@ -17,4 +17,9 @@ public class Destino{
         return categoria;
     }
 
+    @Override
+    public String toString() {
+        return destino + " (" + categoria + ")";
+    }
+
 }
