@@ -1,63 +1,44 @@
 package pdi_tur.model.pacotes;
 
 import pdi_tur.model.destino.Destino;
-import pdi_tur.model.destino.Hospedagem;
-import pdi_tur.model.singleton.CSingleton;
+import pdi_tur.model.hospedagem.Hospedagem;
+import pdi_tur.model.hospedagem.Quarto;
+import pdi_tur.model.passagemAerea.PassagemAerea;
 
-public abstract class PacoteViagem extends Destino, Hospedagem, CSingleton implements Pacote, Reservaveis{
-    private String nomePacote;
-    private int valor;
-    private Destino destino;
+public abstract class PacoteViagem implements Reservaveis{
+    private PassagemAerea passagemAerea;
     private Hospedagem hospedagem;
-    private boolean primeiraClasse;
-    private String companhiaAerea;
-    private boolean guiaTuristico;
-    private String atracoes;
-
-    public PacoteViagem(String nomePacote, int valor, Destino destino, Hospedagem hospedagem, boolean primeiraClasse, String companhiaAerea, boolean guiaTuristico, String atracoes){
-        super();
-        this.nomePacote = nomePacote;
-        this.valor = valor;
-        this.primeiraClasse = primeiraClasse;
-        this.companhiaAerea = companhiaAerea;
-        this.guiaTuristico = guiaTuristico;
-        this.atracoes = atracoes;
-    }
-
-    @Override
-    public String getNomePacote(){
-        return nomePacote;
-    }
+    private Quarto quarto;
+    private Destino destino;
+    private double precopp; //Preço por pessoa
     
-    public int getValor(){
-        return valor;
+    public PacoteViagem(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino,
+            double precopp) {
+        this.passagemAerea = passagemAerea;
+        this.hospedagem = hospedagem;
+        this.quarto = quarto;
+        this.destino = destino;
+        this.precopp = precopp;
     }
 
-    public Destino getDestino(){
-        return destino;
+    public PassagemAerea getPassagemAerea() {
+        return passagemAerea;
     }
 
-    public Hospedagem getHospedagem(){
+    public Hospedagem getHospedagem() {
         return hospedagem;
     }
 
-    public boolean getPrimeiraClasse(){
-        return primeiraClasse;
+    public Quarto getQuarto() {
+        return quarto;
     }
 
-    @Override
-    public String getCompanhiaAerea(){
-        return companhiaAerea;
+    public Destino getDestino() {
+        return destino;
     }
 
-    public boolean getGuiaTuristico(){
-        return guiaTuristico;
+    public double getPrecopp() {
+        return precopp;
     }
-
-    @Override
-    public String getAtracoes(){
-        return atracoes;
-    }
-
 
 }
