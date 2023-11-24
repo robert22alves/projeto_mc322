@@ -1,5 +1,5 @@
-package pdi_tur.model.pacotes; 
+package pdi_tur.model.pacotes;
 
 public interface Reservaveis{
-
+    double getPrecoFinal();
 }

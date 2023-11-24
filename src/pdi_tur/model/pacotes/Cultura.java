@@ -12,11 +12,11 @@ public class Cultura extends Relaxamento{
     private ArrayList<String> pontosTuristicos;
     
     public Cultura(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino, double precopp,
-            int qtdAdultos, int qtdCriancas, ArrayList<Integer> idadeCriancas, boolean guiaTuristico,
-            ArrayList<String> pontosTuristicos) {
-        super(passagemAerea, hospedagem, quarto, destino, precopp, qtdAdultos, qtdCriancas, idadeCriancas);
+            boolean guiaTuristico, ArrayList<String> pontosTuristicos) {
+        super(passagemAerea, hospedagem, quarto, destino, precopp);
         this.guiaTuristico = guiaTuristico;
         this.pontosTuristicos = pontosTuristicos;
+        this.categoria = CategoriasViagem.CULTURA;
     }
 
     public boolean isGuiaTuristico() {

@@ -14,24 +14,33 @@ public class Bagagens {
     @Override
     public String toString() {
         if (mochila || bagagemMao || bagagemDespachar) {
-            String info = "Bagagem:\n";
+            String info = "";
 
             if (mochila) {
-                info = info + "inclui uma mochila ou bolsa\n" + "deve caber embaixo do assento dianteiro.\n";
+                info = info + "permite uma mochila ou bolsa\n";
+            }
+            else {
+                info = info + "não permite mochila ou bolsa\n";
             }
 
             if (bagagemMao) {
-                info = info + "inclui bagagem de mão\n" + "deve caber no compartimento superior do avião.\n";
+                info = info + "permite bagagem de mão\n";
+            }
+            else {
+                info = info + "não permite bagagem de mão\n";
             }
 
             if (bagagemDespachar) {
-                info = info + "inclui bagagem para despachar\n" + "1 peça de 23Kg por adulto.\n" + "O despache é feito durante o Check-in no aeroporto.";
+                info = info + "inclui bagagem para despachar\n";
+            }
+            else {
+                info = info + "não inclui bagagem para despachar\n";
             }
 
             return info;
         }
 
-        return "Não pode Bagagens";
+        return "Não permite Bagagens";
     }
 
     

@@ -6,11 +6,12 @@ import pdi_tur.model.hospedagem.Quarto;
 import pdi_tur.model.passagemAerea.PassagemAerea;
 
 public abstract class PacoteViagem implements Reservaveis{
-    private PassagemAerea passagemAerea;
-    private Hospedagem hospedagem;
-    private Quarto quarto;
-    private Destino destino;
-    private double precopp; //Preço por pessoa
+    protected PassagemAerea passagemAerea;
+    protected Hospedagem hospedagem;
+    protected Quarto quarto;
+    protected Destino destino;
+    protected double precopp; //Preço por pessoa
+    protected CategoriasViagem categoria;
     
     public PacoteViagem(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino,
             double precopp) {
@@ -41,4 +42,7 @@ public abstract class PacoteViagem implements Reservaveis{
         return precopp;
     }
 
+    public CategoriasViagem getCategoria() {
+        return categoria;
+    }
 }

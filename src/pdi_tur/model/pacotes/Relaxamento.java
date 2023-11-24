@@ -14,16 +14,31 @@ public class Relaxamento extends PacoteViagem{
     private double precoFinal;
 
     public Relaxamento(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino,
-            double precopp, int qtdAdultos, int qtdCriancas, ArrayList<Integer> idadeCriancas) {
+            double precopp) {
         super(passagemAerea, hospedagem, quarto, destino, precopp);
+        this.categoria = CategoriasViagem.RELAXAMENTO;
+    }
+
+    public void calcularPreco(int qtdAdultos, int qtdCriancas, ArrayList<Integer> idadeCriancas) {
         this.qtdAdultos = qtdAdultos;
         this.qtdCriancas = qtdCriancas;
         this.idadeCriancas = idadeCriancas;
-        this.precoFinal = calcularPreco();
-    }
 
-    private double calcularPreco() {
-        return 0;
+        double preco = precopp * qtdAdultos;
+
+        for (Integer idade : idadeCriancas) {
+            if (idade.intValue() < 2) {
+                preco += precopp * 0.4;
+            }
+            else if (idade.intValue() < 12) {
+                preco += precopp * 0.6;
+            }
+            else {
+                preco += precopp * 0.8;
+            }
+        }
+
+        this.precoFinal = preco;
     }
 
     public int getQtdAdultos() {
@@ -38,6 +53,7 @@ public class Relaxamento extends PacoteViagem{
         return idadeCriancas;
     }
 
+    @Override
     public double getPrecoFinal() {
         return precoFinal;
     } 
