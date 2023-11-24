@@ -58,28 +58,8 @@ public class Servicos {
     private ArrayList<String> lingua;
     /*Na hospedagem se fala: Portugues, Ingles, Espanhol, etc */
 
-    public Servicos(ArrayList<String> lazer, ArrayList<String> bemEstar, ArrayList<String> paraCriancas,
-            ArrayList<String> arLivre, ArrayList<String> refeicoes, ArrayList<String> estacionamentoTransporte,
-            ArrayList<String> animaisEstimacao, ArrayList<String> seguranca, ArrayList<String> acessibilidade,
-            ArrayList<String> aTrabalho, ArrayList<String> lavanderia, ArrayList<String> areaComum,
-            ArrayList<String> recepcao, ArrayList<String> higiene, ArrayList<String> regras, ArrayList<String> lingua) {
-        this.lazer = lazer;
-        this.bemEstar = bemEstar;
-        this.paraCriancas = paraCriancas;
-        this.arLivre = arLivre;
-        this.refeicoes = refeicoes;
-        this.estacionamentoTransporte = estacionamentoTransporte;
-        this.animaisEstimacao = animaisEstimacao;
-        this.seguranca = seguranca;
-        this.acessibilidade = acessibilidade;
-        this.aTrabalho = aTrabalho;
-        this.lavanderia = lavanderia;
-        this.areaComum = areaComum;
-        this.recepcao = recepcao;
-        this.higiene = higiene;
-        this.regras = regras;
-        this.lingua = lingua;
-    }
+    private ArrayList<String> servicosDestaque;
+    /*Dentre os serviços acima, aqueles que gera mais interesse. no máximo 4 */
 
     public Servicos(){
         this.lazer = new ArrayList<>();
@@ -98,6 +78,7 @@ public class Servicos {
         this.higiene = new ArrayList<>();
         this.regras = new ArrayList<>();
         this.lingua = new ArrayList<>();
+        this.servicosDestaque = new ArrayList<>();
     }
 
     public ArrayList<String> getLazer() {
@@ -164,5 +145,7 @@ public class Servicos {
         return lingua;
     }
 
-    
+    public ArrayList<String> getServicosDestaque() {
+        return servicosDestaque;
+    }
 }

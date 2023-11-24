@@ -1,29 +1,27 @@
 package pdi_tur.model.hospedagem;
 
-import java.util.ArrayList;
-
 import pdi_tur.model.dataHora.Horario;
 
 public class Hospedagem{
     private String nome;
     private String endereco;
-    private int distanciaCentro;
+    private String localizacao;
+    private String distanciaCentro;
     private int classificacao;
     private Horario checkin;
     private Horario checkout;
     private Servicos servicos;
-    private ArrayList<Quarto> quartos;
 
-    public Hospedagem(String nome, String endereco, int distanciaCentro, int classificacao, Horario checkin,
-        Horario checkout, Servicos servicos, ArrayList<Quarto> quartos) {
+    public Hospedagem(String nome, String endereco, String localizacao, String distanciaCentro, int classificacao, Horario checkin,
+        Horario checkout, Servicos servicos) {
         this.nome = nome;
         this.endereco = endereco;
+        this.localizacao = localizacao;
         this.distanciaCentro = distanciaCentro;
         this.classificacao = classificacao;
         this.checkin = checkin;
         this.checkout = checkout;
         this.servicos = servicos;
-        this.quartos = quartos;
     }
 
     public String getNome() {
@@ -34,7 +32,11 @@ public class Hospedagem{
         return endereco;
     }
 
-    public int getDistanciaCentro() {
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public String getDistanciaCentro() {
         return distanciaCentro;
     }
 
@@ -52,10 +54,6 @@ public class Hospedagem{
     
     public Servicos getServicos() {
         return servicos;
-    }
-    
-    public ArrayList<Quarto> getQuartos() {
-        return quartos;
     }
 
 }
