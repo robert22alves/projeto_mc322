@@ -1,5 +1,5 @@
 package pdi_tur.controller;
 
-public class PacoteController {
+public interface PacoteController {
     
 }

@@ -3,17 +3,19 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import pdi_tur.controller.*;
 import pdi_tur.model.pacotes.PacoteViagem;
 import pdi_tur.model.pessoas.*;
 
 public class Main {
+	static UsuarioController usuarioController = new UsuarioControllerImpl();
 	static Usuario usuario = null;
 	static boolean logado = false;
 	static boolean adm = false;
 	static int opcao = 0;
 
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
@@ -155,14 +157,49 @@ public class Main {
 			opcao = scanner.nextInt();
 			scanner.nextLine();
 
+			String login, senha, email;
+
 			switch (opcao) {
 				case 1:
-					//TODO fazer login
+					System.out.println();
+					System.out.print("Usuario: ");
+					login = scanner.nextLine();
+					System.out.print("Senha: ");
+					senha = scanner.nextLine();
+					System.out.println();
+
+					usuario = usuarioController.signup(login, senha);
+					if (usuario == null) {
+						System.out.print("Usuario ou Senha incorretos\n");
+						break;
+					}
+
+					logado = true;
+					if (usuario.getTipo() == TipoUsuario.ADMINISTRADOR) {
+						adm = true;
+					}
 					return;
 						
 				case 2:
-					//TODO fazer cadastro
-					return;
+					System.out.println();
+					System.out.print("Usuario: ");
+					login = scanner.nextLine();
+					System.out.print("Senha: ");
+					senha = scanner.nextLine();
+					System.out.print("Email: ");
+					email = scanner.nextLine();
+					System.out.println();
+
+					Usuario temp = new Usuario(login, email, senha, TipoUsuario.CLIENTE);
+
+					if (usuarioController.cadastrar(temp)) {
+						System.out.print("Usuário Cadastrado\n");
+						usuario = temp;
+						return;
+					}
+					
+					System.out.print("Não é possível cadastrar com essas informações\n");
+					break;
 						
 				case 3:
 					return;
@@ -220,6 +257,11 @@ public class Main {
 
 	public static void buscarPacote(Scanner scanner) {
 		ArrayList<PacoteViagem> pacotes = listaPacotes(scanner);
+		//TODO visualizar pacotes e selecionar
+
+		//TODO visualizar informações do Pacote
+
+		//TODO fazer reserva
 		
 	}
 
@@ -266,14 +308,14 @@ public class Main {
 	}
 
 	public static void adicionarPacote(Scanner scanner) {
-		
+		//TODO adicionar pacote
 	}
 
 	public static void editarPacote(Scanner scanner) {
-		
+		//TODO editar pacote
 	}
 
 	public static void removerPacote(Scanner scanner) {
-		
+		//TODO remover pacote
 	}
 } 
