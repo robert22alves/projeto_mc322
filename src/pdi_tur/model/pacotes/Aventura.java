@@ -11,9 +11,10 @@ public class Aventura extends Relaxamento{
     private ArrayList<String> atividades;
 
     public Aventura(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino, double precopp,
-            int qtdAdultos, int qtdCriancas, ArrayList<Integer> idadeCriancas, ArrayList<String> atividades) {
-        super(passagemAerea, hospedagem, quarto, destino, precopp, qtdAdultos, qtdCriancas, idadeCriancas);
+            ArrayList<String> atividades) {
+        super(passagemAerea, hospedagem, quarto, destino, precopp);
         this.atividades = atividades;
+        this.categoria = CategoriasViagem.AVENTURA;
     }
 
     public ArrayList<String> getAtividades() {
