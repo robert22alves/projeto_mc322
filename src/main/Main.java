@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import pdi_tur.model.pacotes.PacoteViagem;
+import pdi_tur.model.pessoas.*;
 
 public class Main {
+	static Usuario usuario = null;
 	static boolean logado = false;
 	static boolean adm = false;
 	static int opcao = 0;
@@ -47,6 +49,7 @@ public class Main {
 						System.out.println();
 						logado = false;
 						adm = false;
+						usuario = null;
 						break;
 						
 					case 5:
@@ -62,8 +65,10 @@ public class Main {
 				System.out.println("---- Turismo e Viagem ----");
 				System.out.println();
 				System.out.println("1. Buscar Pacote de Viagem");
-				System.out.println("2. Fechar Sessão");
-				System.out.println("3. Sair");
+				System.out.println("2. Ver Reserva");
+				System.out.println("3. Editar Informações");
+				System.out.println("4. Fechar Sessão");
+				System.out.println("5. Sair");
 				System.out.println();
 				System.out.println();
 				System.out.print("Escolha uma opção: ");
@@ -75,14 +80,25 @@ public class Main {
 					case 1:
 						buscarPacote(scanner);
 						break;
-						
+					
 					case 2:
+						if (usuario.getReserva() == null) {
+							System.out.println("Não há Reservas");
+						}
+						break;
+					
+					case 3:
+						editarUsuario(scanner);
+						break;
+						
+					case 4:
 						System.out.println();
 						logado = false;
 						adm = false;
+						usuario = null;
 						break;
 						
-					case 3:
+					case 5:
 						scanner.close();
 						return;
 					
@@ -126,34 +142,80 @@ public class Main {
 	}
 
 	public static void iniciarSessao(Scanner scanner) {
-		System.out.println("---- Iniciar Sessão ----");
-        System.out.println();
-		System.out.println("1. Entrar");
-        System.out.println("2. Cadastrar");
-        System.out.println("3. Voltar");
-        System.out.println();
-        System.out.println();
-        System.out.print("Escolha uma opção: ");
+		while (true) {
+			System.out.println("---- Iniciar Sessão ----");
+			System.out.println();
+			System.out.println("1. Entrar");
+			System.out.println("2. Cadastrar");
+			System.out.println("3. Voltar");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
 
-        opcao = scanner.nextInt();
-        scanner.nextLine();
+			opcao = scanner.nextInt();
+			scanner.nextLine();
 
-		switch (opcao) {
-			case 1:
-				//TODO fazer login
-				return;
+			switch (opcao) {
+				case 1:
+					//TODO fazer login
+					return;
+						
+				case 2:
+					//TODO fazer cadastro
+					return;
+						
+				case 3:
+					return;
 					
-			case 2:
-				//TODO fazer cadastro
-				return;
-					
-			case 3:
-				return;
-				
-			default:
-				System.out.println("Opção inválida. Por favor, escolha novamente.");
-				break;
+				default:
+					System.out.println("Opção inválida. Por favor, escolha novamente.");
+					break;
 			}
+		}
+	}
+
+	public static void editarUsuario(Scanner scanner) {
+		while (true) {	
+			System.out.println("---- Editar Usuario ----");
+			System.out.println();
+			System.out.println("1. Nome");
+			System.out.println("2. Email");
+			System.out.println("3. Senha");
+			System.out.println("4. Voltar");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
+		
+			opcao = scanner.nextInt();
+			scanner.nextLine();
+
+			switch (opcao) {
+				case 1:
+					System.out.print("Novo Nome: ");
+					usuario.setNome(scanner.nextLine());
+					System.out.println("Nome Alterado");
+					break;
+						
+				case 2:
+					System.out.print("Novo Email: ");
+					usuario.setEmail(scanner.nextLine());
+					System.out.println("Email Alterado");
+					break;
+						
+				case 3:
+					System.out.print("Nova Senha: ");
+					usuario.setSenha(scanner.nextLine());
+					System.out.println("Senha Alterada");
+					break;
+				
+				case 4:
+					return;
+					
+				default:
+					System.out.println("Opção inválida. Por favor, escolha novamente.");
+					break;
+			}
+		}
 	}
 
 	public static void buscarPacote(Scanner scanner) {
