@@ -1,4 +1,4 @@
-package pdi_tur.model.dataHora;
+package pdi_tur.model.diversos;
 
 public class Horario {
     private int horas;

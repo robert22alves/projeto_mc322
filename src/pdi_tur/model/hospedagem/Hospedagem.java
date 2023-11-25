@@ -1,6 +1,6 @@
 package pdi_tur.model.hospedagem;
 
-import pdi_tur.model.dataHora.Horario;
+import pdi_tur.model.diversos.Horario;
 
 public class Hospedagem{
     private String nome;
