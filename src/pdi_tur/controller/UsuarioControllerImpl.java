@@ -29,7 +29,7 @@ public class UsuarioControllerImpl implements UsuarioController{
 
     @Override
     public boolean cadastrar(Usuario usuario) {
-        if (usuarios.containsValue(usuario)) {
+        if (usuarios.containsKey(usuario.getNome()) || usuarios.containsValue(usuario)) {
             return false;
         }
 
