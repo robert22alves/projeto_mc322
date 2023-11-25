@@ -214,9 +214,11 @@ public class PacoteView {
         PassagemAerea passagem = pacote.getPassagemAerea();
         System.out.println("Companhia Aérea: " + passagem.getCompanhiaAerea());
         System.out.println("Ida " + passagem.getDataSaidaIda());
+        System.out.println("Voo " + passagem.getIdIda());
         System.out.println(passagem.getAeroportoSaidaIda() + "(" + passagem.getHorarioSaidaIda()+ ") voo direto " + passagem.getAeroportoChegadaIda() + "(" + passagem.getHorarioChegadaIda()+ ")");
         System.out.println("Duração: " + passagem.getDuracaoIda());
         System.out.println("Volta " + passagem.getDataSaidaVolta());
+        System.out.println("Voo " + passagem.getIdVolta());
         System.out.println(passagem.getAeroportoSaidaVolta() + "(" + passagem.getHorarioSaidaVolta()+ ") voo direto " + passagem.getAeroportoChegadaVolta() + "(" + passagem.getHorarioChegadaVolta()+ ")");
         System.out.println("Duração: " + passagem.getDuracaoVolta());
     }

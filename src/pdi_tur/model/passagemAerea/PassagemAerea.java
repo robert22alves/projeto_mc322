@@ -1,7 +1,7 @@
 package pdi_tur.model.passagemAerea;
 
-import pdi_tur.model.dataHora.Data;
-import pdi_tur.model.dataHora.Horario;
+import pdi_tur.model.diversos.Data;
+import pdi_tur.model.diversos.Horario;
 
 public class PassagemAerea {
     private String companhiaAerea;
@@ -43,11 +43,11 @@ public class PassagemAerea {
         return ida.id;
     }
 
-    public String getAeroportoSaidaIda() {
+    public Aeroporto getAeroportoSaidaIda() {
         return ida.aeroportoSaida;
     }
 
-    public String getAeroportoChegadaIda() {
+    public Aeroporto getAeroportoChegadaIda() {
         return ida.aeroportoChegada;
     }
 
@@ -76,11 +76,11 @@ public class PassagemAerea {
         return ida.id;
     }
 
-    public String getAeroportoSaidaVolta() {
+    public Aeroporto getAeroportoSaidaVolta() {
         return ida.aeroportoSaida;
     }
 
-    public String getAeroportoChegadaVolta() {
+    public Aeroporto getAeroportoChegadaVolta() {
         return ida.aeroportoChegada;
     }
 
