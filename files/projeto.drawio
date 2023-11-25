@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-11-25T21:45:26.928Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="3kGoDu42axpXOfSLPxJ1" version="22.1.4" type="github">
+<mxfile host="app.diagrams.net" modified="2023-11-25T22:05:49.669Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="btpKKFo4_3UJwB9S_mLr" version="22.1.4" type="github">
   <diagram name="Page-1" id="b5b7bab2-c9e2-2cf4-8b2a-24fd1a2a6d21">
-    <mxGraphModel dx="1600" dy="683" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1067" dy="455" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry x="307.50088744588743" y="14.659897435897433" width="175.71428571428575" height="152.30769230769232" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-84" value="&amp;lt;&amp;lt;enum&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CategoriasViagem&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="40" y="505.14" width="140" height="129.99571428571429" as="geometry" />
+          <mxGeometry y="530" width="140" height="129.99571428571429" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-85" value="AVENTURA" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-84">
           <mxGeometry y="50" width="140" height="24.514285714285716" as="geometry" />
@@ -40,8 +40,8 @@
         <mxCell id="uOKciexOjNlCDNnouLq3-93" value="+ adicionarReserva(pacote, usuario): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-90">
           <mxGeometry y="90" width="260" height="34" as="geometry" />
         </mxCell>
-        <mxCell id="uOKciexOjNlCDNnouLq3-94" value="Voo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="340" y="129.99512195121952" width="230" height="190" as="geometry" />
+        <mxCell id="uOKciexOjNlCDNnouLq3-94" value="PacoteViagem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
+          <mxGeometry x="420" y="309.9951219512195" width="230" height="190" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-95" value="#&amp;nbsp;passagemAerea: PassagemAerea&lt;br&gt;#&amp;nbsp;hospedagem: Hospedagem&lt;br&gt;#&amp;nbsp;quarto: Quarto&lt;br&gt;#&amp;nbsp;destino: Destino&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;#&amp;nbsp;precopp: double&lt;br&gt;#&amp;nbsp;categoria: CategoriasViagem" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-94">
           <mxGeometry y="26" width="230" height="104" as="geometry" />
@@ -50,10 +50,10 @@
           <mxGeometry y="130" width="230" height="60" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-98" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«interface»&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Reservaveis&lt;/b&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getPrecoFinal(): double&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="600" y="175.99" width="190" height="110" as="geometry" />
+          <mxGeometry x="39" y="330" width="190" height="110" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-99" value="Relaxamento" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="270" y="345.9851219512195" width="350" height="144.14951219512196" as="geometry" />
+          <mxGeometry x="380" y="129.99512195121952" width="350" height="144.14951219512196" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-100" value="+&amp;nbsp;qtdAdultos: int&lt;br&gt;+&amp;nbsp;qtdCriancas: int&lt;br&gt;+&amp;nbsp;idadeCriancas: ArrayList&amp;lt;Integer&amp;gt;&lt;br&gt;+&amp;nbsp;precoFinal: double" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-99">
           <mxGeometry y="26" width="350" height="64" as="geometry" />
@@ -65,7 +65,7 @@
           <mxGeometry y="97.21951219512195" width="350" height="46.93" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-104" value="Cultura" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="300" y="515.1351219512195" width="220" height="120" as="geometry" />
+          <mxGeometry x="230" y="539.9951219512195" width="220" height="120" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-105" value="+ guiaTuristico: boolean&lt;br&gt;+ pontosTuristicos: ArrayList&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-104">
           <mxGeometry y="26" width="220" height="44" as="geometry" />
@@ -74,7 +74,7 @@
           <mxGeometry y="70" width="220" height="50" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-107" value="Aventura" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="6e0c8c40b5770093-18">
-          <mxGeometry x="580" y="530.9851219512195" width="190" height="100" as="geometry" />
+          <mxGeometry x="600" y="559.9951219512195" width="190" height="100" as="geometry" />
         </mxCell>
         <mxCell id="uOKciexOjNlCDNnouLq3-108" value="+ atividades: ArrayList&amp;lt;String&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="uOKciexOjNlCDNnouLq3-107">
           <mxGeometry y="26" width="190" height="24" as="geometry" />
