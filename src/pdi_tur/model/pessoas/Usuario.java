@@ -2,7 +2,7 @@ package pdi_tur.model.pessoas;
 
 import pdi_tur.model.pacotes.PacoteViagem;
 
-public class Usuario implements NotifReserva{
+public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
@@ -62,7 +62,6 @@ public class Usuario implements NotifReserva{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
@@ -77,11 +76,6 @@ public class Usuario implements NotifReserva{
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -91,7 +85,5 @@ public class Usuario implements NotifReserva{
 			return false;
 		return true;
 	}
-
-	
 	
 }

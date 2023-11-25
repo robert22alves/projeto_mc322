@@ -24,9 +24,10 @@ public class Main {
 				System.out.println();
 				System.out.println("1. Adicionar Pacote de Viagem");
 				System.out.println("2. Editar Pacote de Viagem");
-				System.out.println("2. Remover Pacote de Viagem");
-				System.out.println("4. Fechar Sessão");
-				System.out.println("5. Sair");
+				System.out.println("3. Remover Pacote de Viagem");
+				System.out.println("4. Cadastrar Adm");
+				System.out.println("5. Fechar Sessão");
+				System.out.println("6. Sair");
 				System.out.println();
 				System.out.println();
 				System.out.print("Escolha uma opção: ");
@@ -48,13 +49,33 @@ public class Main {
 						return;
 					
 					case 4:
+						System.out.println("Cadastrar Adm");
+						System.out.print("Usuario: ");
+						String login = scanner.nextLine();
+						System.out.print("Senha: ");
+						String senha = scanner.nextLine();
+						System.out.print("Email: ");
+						String email = scanner.nextLine();
+						System.out.println();
+
+						Usuario temp = new Usuario(login, email, senha, TipoUsuario.ADMINISTRADOR);
+
+						if (usuarioController.cadastrar(temp)) {
+							System.out.print("Administrador Cadastrado\n");
+							break;
+						}
+
+						System.out.print("Não é possível cadastrar com essas informações\n");
+						break;
+
+					case 5:
 						System.out.println();
 						logado = false;
 						adm = false;
 						usuario = null;
 						break;
 						
-					case 5:
+					case 6:
 						scanner.close();
 						return;
 
@@ -86,7 +107,10 @@ public class Main {
 					case 2:
 						if (usuario.getReserva() == null) {
 							System.out.println("Não há Reservas");
+							break;
 						}
+
+						detalhesPacote(scanner, usuario.getReserva());
 						break;
 					
 					case 3:
@@ -197,7 +221,7 @@ public class Main {
 						usuario = temp;
 						return;
 					}
-					
+
 					System.out.print("Não é possível cadastrar com essas informações\n");
 					break;
 						
@@ -263,6 +287,10 @@ public class Main {
 
 		//TODO fazer reserva
 		
+	}
+
+	public static void detalhesPacote(Scanner scanner, PacoteViagem pacote) {
+
 	}
 
 	public static ArrayList<PacoteViagem> listaPacotes(Scanner scanner){
