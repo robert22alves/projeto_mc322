@@ -12,6 +12,7 @@ public abstract class PacoteViagem implements Reservaveis{
     protected Destino destino;
     protected double precopp; //Preço por pessoa
     protected CategoriasViagem categoria;
+    protected boolean isReservado;
     
     public PacoteViagem(PassagemAerea passagemAerea, Hospedagem hospedagem, Quarto quarto, Destino destino,
             double precopp) {
@@ -20,6 +21,7 @@ public abstract class PacoteViagem implements Reservaveis{
         this.quarto = quarto;
         this.destino = destino;
         this.precopp = precopp;
+        this.isReservado = false;
     }
 
     public PassagemAerea getPassagemAerea() {
@@ -45,4 +47,15 @@ public abstract class PacoteViagem implements Reservaveis{
     public CategoriasViagem getCategoria() {
         return categoria;
     }
+
+    @Override
+    public boolean isReservado() {
+        return isReservado;
+    }
+
+    @Override
+    public void setReservado(boolean isReservado) {
+        this.isReservado = isReservado;
+    }
+
 }

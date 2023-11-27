@@ -296,22 +296,31 @@ public class Main {
 		
 		System.out.println();
 		System.out.println("Qual pacote deseja escolher? (Digite número 1,2,3...");
-		
-		int numPacote = scanner.nextInt() + 1;
-		PacoteViagem temp = pacotes.get(numPacote);
-		return temp;
+		System.out.println("Digite 0 para voltar");
+
+		int numPacote = scanner.nextInt();
+
+		if (numPacote != 0){
+			PacoteViagem temp = pacotes.get(numPacote-1);
+			return temp;
+		}
+		return null;
 	}
 
 	public static void buscarPacote(Scanner scanner) {
 		ArrayList<PacoteViagem> pacotes = listaPacotes(scanner);
-		//TODO visualizar pacotes e selecionar
+		if (pacotes == null) {
+			return;
+		}
+		pacotes = calcularPreco(scanner, pacotes);
 		
 		PacoteViagem temp = devolverPacote(scanner, pacotes);
-		
-		//TODO visualizar informações do Pacote
+		if (temp == null) {
+			return;
+		}
+
 		detalhesPacote(scanner, temp);
 		
-		//TODO Reservar Pacote
 		System.out.println("Deseja reservar o Pacote? ('Sim' ou 'Não'");
 		System.out.println();
 		
@@ -321,15 +330,25 @@ public class Main {
 		case "Sim":
 			if(logado) {
 				usuario.setReserva(temp);
+				temp.setReservado(true);
 				System.out.println("Pacote Reservado");
 				System.out.println();
-				
 				return;
 				
 			}
+
 			System.out.println("Faça login primeiro");
+			iniciarSessao(scanner);
 			System.out.println();
 			
+			if(logado) {
+				usuario.setReserva(temp);
+				temp.setReservado(true);
+				System.out.println("Pacote Reservado");
+				System.out.println();
+				return;
+				
+			}
 			return;
 			
 		case "Não":
@@ -395,25 +414,34 @@ public class Main {
 		System.out.println("---- Encontre o Melhor Pacote para Você ----");
         System.out.print("Origem: ");
 		String origem = scanner.nextLine();
-		//TODO verificar se existe cidade de origem
+		if (pacoteController.buscarCidade(origem) == null) {
+			System.out.println("Cidade não Cadastrada");
+			return null;
+		}
+		origem = pacoteController.buscarCidade(origem).getAeroporto();
 
 		System.out.print("Destino: ");
 		String destino = scanner.nextLine();
-		//TODO verificar se existe destino
+		if (pacoteController.buscarCidade(destino) == null) {
+			System.out.println("Cidade não Cadastrada");
+			return null;
+		}
+		destino = pacoteController.buscarCidade(destino).getAeroporto();
 
 		System.out.println("Datas (dd/mm/aaaa)");
 		System.out.print("Ida: ");
-		String ida = scanner.nextLine();
-		//TODO verificar formatação correta
+		Data ida = Data.newData(scanner.nextLine());
 
 		System.out.print("Volta: ");
-		String volta = scanner.nextLine();
-		//TODO verificar formatação correta
+		Data volta = Data.newData(scanner.nextLine());
 
+		return pacoteController.buscar(origem, destino, ida, volta);
+	}
+
+	public static ArrayList<PacoteViagem> calcularPreco(Scanner scanner, ArrayList<PacoteViagem> pacotes) {
 		System.out.print("Quantidade de Adultos: ");
 		int adultos = scanner.nextInt();
 		scanner.nextLine();
-		//TODO verificar se é maior que zero
 
 		System.out.print("Quantidade de Crianças: ");
 		int criancas = scanner.nextInt();
@@ -428,13 +456,15 @@ public class Main {
 				idades.add(scanner.nextInt());
 			}
 		}
-	
-		//TODO gerar uma lista de pacotes de acordo com as informações de busca
-		return null;
+
+		for (PacoteViagem pacote : pacotes) {
+			pacote.calcularPreco(adultos, criancas, idades);
+		}
+
+		return pacotes;
 	}
 
 	public static void adicionarPacote(Scanner scanner) {
-		//TODO adicionar pacote
 		System.out.println("Adicionar Pacote");
 		System.out.println();
 		
@@ -617,39 +647,34 @@ public class Main {
 		
 		Voo vooVolta = new Voo(saida, chegada, horaSaida, horaChegada, DuracaoVoo, idVoo, aeroportoS, aeroportoC);
 		
-		PassagemAerea passagemAerea;
+		PassagemAerea passagemAerea = null;
 		
 		while(true) {
-		System.out.println("Classe de Voo:");
-		System.out.println();
-		System.out.println("1. Economica");
-		System.out.println("2. Executiva");
-		System.out.println("3. Primeira Classe");
-		System.out.println("4. Sair");
-		
-		opcao = scanner.nextInt();
-		scanner.nextLine();
-		
-		switch(opcao) {
-		case 1:
-			passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.ECONOMICA, vooIda, vooVolta, bagagem);
-			break;
+			System.out.println("Classe de Voo:");
+			System.out.println();
+			System.out.println("1. Economica");
+			System.out.println("2. Executiva");
+			System.out.println("3. Primeira Classe");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
+
+			opcao = scanner.nextInt();
+			scanner.nextLine();
 			
-		case 2:
-			passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.EXECUTIVA, vooIda, vooVolta, bagagem);
-			break;
-			
-		case 3:
-			passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.PRIMEIRACLASSE, vooIda, vooVolta, bagagem);
-			break;
-			
-		case 4:
-			return;
-			
-		default:
-			System.out.println("Opção inválida. Por favor, escolha novamente.");
-			break;	
-	    }
+			if (opcao == 1) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.ECONOMICA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 2) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.EXECUTIVA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 3){
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.PRIMEIRACLASSE, vooIda, vooVolta, bagagem);
+				break;
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
+				break;	
+			}
 		}
 		
 		System.out.print("Hospedagem = ");
@@ -731,12 +756,6 @@ public class Main {
 		int superficie = scanner.nextInt();
 		scanner.nextLine();
 		
-		System.out.print("Quantidade total:");
-		System.out.println();
-		
-		int qtdTotal = scanner.nextInt();
-		scanner.nextLine();
-		
 		ArrayList<String> detalhes = new ArrayList<>();
 		
 		System.out.print("O quarto possui detalhes? TV de tela plana, Ar condicionado, Frigobar, Aquecimento, Wi-Fi grátis...('Sim' ou 'Não'):");
@@ -746,10 +765,10 @@ public class Main {
 		
 		String detalhe;
 		
-		Quarto quarto;
+		Quarto quarto = null;
 		
 		if(opcaoS == "Não") {
-			quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, null, qtdTotal);
+			quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, new ArrayList<>());
 		}else if(opcaoS == "Sim") {
 			System.out.print("Qual detalhe?");
 			System.out.println();
@@ -773,7 +792,7 @@ public class Main {
 					detalhes.add(detalhe);
 					
 				}else if(opcaoS == "Não") {
-					quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, detalhes, qtdTotal);
+					quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, detalhes);
 					break;
 					
 				}
@@ -791,47 +810,38 @@ public class Main {
 		Destino destino;
 		
 		while(true) {
-		System.out.println("Categorias destino:");
-		System.out.println();
-		System.out.println("1. Praia");
-		System.out.println("2. Montanha");
-		System.out.println("3. Cidade");
-		System.out.println("4. Savana");
-		System.out.println("5. Resort");
-		System.out.println("6. Sair");
-		
-		opcao = scanner.nextInt();
-		scanner.nextLine();
-		
-		switch(opcao) {
-		case 1:
-			destino = new Destino(destinoNome, CategoriasDestino.PRAIA);
-			break;
+			System.out.println("Categorias destino:");
+			System.out.println();
+			System.out.println("1. Praia");
+			System.out.println("2. Montanha");
+			System.out.println("3. Cidade");
+			System.out.println("4. Savana");
+			System.out.println("5. Resort");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
 			
-		case 2:
-			destino = new Destino(destinoNome, CategoriasDestino.MONTANHA);
-			break;
+			opcao = scanner.nextInt();
+			scanner.nextLine();
 			
-		case 3:
-			destino = new Destino(destinoNome, CategoriasDestino.CIDADE);
-			break;
-		
-		case 4:
-			destino = new Destino(destinoNome, CategoriasDestino.SAVANA);
-			break;
-			
-		case 5:
-			destino = new Destino(destinoNome, CategoriasDestino.RESORT);
-			break;
-			
-		case 6:
-			return;
-			
-		default:
-			System.out.println("Opção inválida. Por favor, escolha novamente.");
-			break;
-			
-		}	
+			if (opcao == 1) {
+				destino = new Destino(destinoNome, CategoriasDestino.PRAIA);
+				break;
+			} else if (opcao == 2) {
+				destino = new Destino(destinoNome, CategoriasDestino.MONTANHA);
+				break;
+			} else if (opcao == 3) {
+				destino = new Destino(destinoNome, CategoriasDestino.CIDADE);
+				break;
+			} else if (opcao == 4) {
+				destino = new Destino(destinoNome, CategoriasDestino.SAVANA);
+				break;
+			} else if (opcao == 5) {
+				destino = new Destino(destinoNome, CategoriasDestino.RESORT);
+				break;
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
+			}	
 		}
 		
 		System.out.print("Qual o preço por pessoa? ");
@@ -840,217 +850,642 @@ public class Main {
 		Double precopp = scanner.nextDouble();
 		
 		while(true) {
-		System.out.println("Categorias Pacote de Viagem:");
-		System.out.println();
-		System.out.println("1. Aventura");
-		System.out.println("2. Relaxamento");
-		System.out.println("3. Cultura");
-		System.out.println("4. Sair");
-		
-		opcao = scanner.nextInt();
-		scanner.nextLine();
-		
-		int qtdAdultos, qtdCriancas;
-		double precoFinal;
-		ArrayList<Integer> idadeCriancas = new ArrayList<>();
-		ArrayList<String> coisas = new ArrayList<>();
-		
-		int idade;
-		
-		switch(opcao) {
-		case 1:
-			System.out.print("Quantidade de adultos:");
+			System.out.println("Categorias Pacote de Viagem:");
 			System.out.println();
+			System.out.println("1. Aventura");
+			System.out.println("2. Relaxamento");
+			System.out.println("3. Cultura");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
 			
-			qtdAdultos = scanner.nextInt();
+			opcao = scanner.nextInt();
 			scanner.nextLine();
 			
-			System.out.print("Quantidade de crianças:");
-			System.out.println();
+			ArrayList<String> coisas = new ArrayList<>();
 			
-			qtdCriancas = scanner.nextInt();
-			scanner.nextLine();
-			
-			System.out.print("Digite idade de cada criança:");
-			System.out.println();
-			
-			for(int i = 1; i > qtdCriancas; i++) {
-				System.out.print("Criança " +i);
-				System.out.println();
-				
-				idade = scanner.nextInt();
-				scanner.nextLine();
-				
-				idadeCriancas.add(idade);
-			}
-			
-			System.out.print("Digite uma atividade do pacote:");
-			System.out.println();
-			
-			opcaoS = scanner.nextLine();
-			
-			coisas.add(opcaoS);
-			
-			while(true) {
-				System.out.print("Mais atividades? ('Sim' ou 'Não')");
+			if (opcao == 1) {
+				System.out.print("Digite uma atividade do pacote:");
 				System.out.println();
 				
 				opcaoS = scanner.nextLine();
 				
-				if(opcaoS == "Sim") {
-					System.out.print("Digite a atividade:");
+				coisas.add(opcaoS);
+				
+				while(true) {
+					System.out.print("Mais atividades? ('Sim' ou 'Não')");
 					System.out.println();
 					
 					opcaoS = scanner.nextLine();
 					
-					coisas.add(opcaoS);
-				}else if(opcaoS == "Não") {
-					break;
+					if(opcaoS == "Sim") {
+						System.out.print("Digite a atividade:");
+						System.out.println();
+						
+						opcaoS = scanner.nextLine();
+						
+						coisas.add(opcaoS);
+					}else if(opcaoS == "Não") {
+						break;
+					}
 				}
-			}
-			
-			Aventura pacoteAventura = new Aventura(passagemAerea, hospedagem, quarto, destino, precopp, coisas);
-			pacoteAventura.calcularPreco(qtdAdultos, qtdCriancas, idadeCriancas);
-			
-			pacoteController.adicionar(pacoteAventura);
-			
-			break;
-			
-		case 2:
-			System.out.print("Quantidade de adultos:");
-			System.out.println();
-			
-			qtdAdultos = scanner.nextInt();
-			scanner.nextLine();
-			
-			System.out.print("Quantidade de crianças:");
-			System.out.println();
-			
-			qtdCriancas = scanner.nextInt();
-			scanner.nextLine();
-			
-			System.out.print("Digite idade de cada criança:");
-			System.out.println();
-			
-			for(int i = 1; i > qtdCriancas; i++) {
-				System.out.print("Criança " +i);
-				System.out.println();
 				
-				idade = scanner.nextInt();
-				scanner.nextLine();
+				Aventura pacoteAventura = new Aventura(passagemAerea, hospedagem, quarto, destino, precopp, coisas);		
+				pacoteController.adicionar(pacoteAventura);
 				
-				idadeCriancas.add(idade);
-			}
-			
-			Relaxamento pacoteRelaxamento = new Relaxamento(passagemAerea, hospedagem, quarto, destino, precopp);
-			pacoteRelaxamento.calcularPreco(qtdAdultos, qtdCriancas, idadeCriancas);
-			
-			pacoteController.adicionar(pacoteRelaxamento);
-			
-			break;
-			
-		case 3:
-			System.out.print("Quantidade de adultos:");
-			System.out.println();
-			
-			qtdAdultos = scanner.nextInt();
-			scanner.nextLine();
-			
-			System.out.print("Quantidade de crianças:");
-			System.out.println();
-			
-			qtdCriancas = scanner.nextInt();
-			scanner.nextLine();
-			
-			System.out.print("Digite idade de cada criança:");
-			System.out.println();
-			
-			for(int i = 1; i > qtdCriancas; i++) {
-				System.out.print("Criança " +i);
-				System.out.println();
+				break;
+			} else if (opcao == 2) {
+				Relaxamento pacoteRelaxamento = new Relaxamento(passagemAerea, hospedagem, quarto, destino, precopp);
+				pacoteController.adicionar(pacoteRelaxamento);
 				
-				idade = scanner.nextInt();
-				scanner.nextLine();
-				
-				idadeCriancas.add(idade);
-			}
-			
-			System.out.print("Necessita de guia turístico? ('Sim' ou 'Não')");
-			System.out.println();
-			
-			opcaoS = scanner.nextLine();
-			
-			boolean guia = false;
-			
-			if(opcaoS == "Sim") {
-				guia = true;
-			}
-			
-			System.out.print("Digite um Ponto Turístico do pacote:");
-			System.out.println();
-			
-			opcaoS = scanner.nextLine();
-			
-			coisas.add(opcaoS);
-			
-			while(true) {
-				System.out.print("Mais pontos turísticos? ('Sim' ou 'Não')");
+				break;
+			} else if (opcao == 3) {
+				System.out.print("Possui guia turístico? ('Sim' ou 'Não')");
 				System.out.println();
 				
 				opcaoS = scanner.nextLine();
 				
+				boolean guia = false;
+				
 				if(opcaoS == "Sim") {
-					System.out.print("Digite o Ponto Turístico:");
+					guia = true;
+				}
+				
+				System.out.print("Digite um Ponto Turístico do pacote:");
+				System.out.println();
+				
+				opcaoS = scanner.nextLine();
+				
+				coisas.add(opcaoS);
+				
+				while(true) {
+					System.out.print("Mais pontos turísticos? ('Sim' ou 'Não')");
 					System.out.println();
 					
 					opcaoS = scanner.nextLine();
 					
-					coisas.add(opcaoS);
-				}else if(opcaoS == "Não") {
-					break;
+					if(opcaoS == "Sim") {
+						System.out.print("Digite o Ponto Turístico:");
+						System.out.println();
+						
+						opcaoS = scanner.nextLine();
+						
+						coisas.add(opcaoS);
+					}else if(opcaoS == "Não") {
+						break;
+					}
 				}
+				
+				Cultura pacoteCultura = new Cultura(passagemAerea, hospedagem, quarto, destino, precopp, guia, coisas);
+				pacoteController.adicionar(pacoteCultura);
+				
+				break;
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
 			}
-			
-			Cultura pacoteCultura = new Cultura(passagemAerea, hospedagem, quarto, destino, precopp, guia, coisas);
-			pacoteCultura.calcularPreco(qtdAdultos, qtdCriancas, idadeCriancas);
-			
-			pacoteController.adicionar(pacoteCultura);
-			
-			break;
-		
-		case 4:
-			return;
-			
-		default:
-			System.out.println("Opção inválida. Por favor, escolha novamente.");
-			break;
-			
-		}
-		return;
 		}
 	}
 	
 	public static Servicos listaServicos(Scanner scanner){
-		System.out.println("-- Criação de lista de Serviços --");
+		System.out.println("-- Criação de lista de Serviços do Hotel--");
 		System.out.println();
 		
-		return null;
+		Servicos servicos = new Servicos();
+		String opcaoS;
+		String servico;
+
+		System.out.println("Lazer ou Diversão? Piscina climatizada, Mesa de sinuca, Salão de jogos, TV nas áreas comuns...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
 		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getLazer().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getLazer().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Bem-Estar? Academia, Sauna, Hidromassagem...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getBemEstar().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getBemEstar().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Para Crianças? Piscina Infantil, Espaço Kids...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getParaCriancas().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getParaCriancas().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Ao Ar Livre? Jardim...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getArLivre().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getArLivre().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Refeições? Bar, Café da manhã, Cafeteria, Restaurante...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getRefeicoes().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getRefeicoes().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Estacionamento e Transporte? Bicicletas disponíveis grátis, Estacionamento coberto, Estacionamento com custo adicional...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getEstacionamentoTransporte().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getEstacionamentoTransporte().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Animais de Estimação? Aceita animais de estimação com custo adicional...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getAnimaisEstimacao().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getAnimaisEstimacao().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Seguranca? Câmera de segurança em áreas comuns, Segurança 24h...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getSeguranca().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getSeguranca().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Acessibilidade? Unidades e Banheiro adaptado para pessoas com mobilidade reduzida, Elevador...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getAcessibilidade().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getAcessibilidade().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Está a Trabalho? Business center...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getaTrabalho().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getaTrabalho().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Lavanderia? Serviço de lavanderia com custo adicional...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getLavanderia().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getLavanderia().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Em Áreas Comuns? Ar-condicionado, Computadores para uso dos hóspedes, Aquecimento, Wi-Fi grátis...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getAreaComum().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getAreaComum().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Recepção? Depósito de bagagem grátis, Recepção 24h, Câmbio de moedas, Serviço de quarto...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getRecepcao().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getRecepcao().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Higiene? Opções de comida embalada, Álcool em gel nas áreas comuns, Intervalo de desinfecção entre hospedagens...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getHigiene().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getHigiene().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Regras? Proibido fumar em todos os ambientes, Animais de estimação não permitidos...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual serviço? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getRegras().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual serviço?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getRegras().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Na hospedagem se fala: Portugues, Ingles, Espanhol...");
+		System.out.print("'Sim' ou 'Não':");
+		opcaoS = scanner.nextLine();
+		System.out.println();
+		
+		if(opcaoS == "Sim") {
+			System.out.println("Qual lingua? (Digite 1)");
+			servico = scanner.nextLine();
+			System.out.println();
+			
+			servicos.getLingua().add(servico);
+			
+			while(true) {
+				System.out.println("Possui mais idiomas? ('Sim' ou 'Não')");
+				opcaoS = scanner.nextLine();
+				System.out.println();
+				
+				if(opcaoS == "Sim") {
+					System.out.println("Qual lingua?");
+					servico = scanner.nextLine();
+					System.out.println();
+					
+					servicos.getLingua().add(servico);
+					
+				}else if(opcaoS == "Não") {
+					break;
+				}
+			}
+		}
+
+		System.out.println("Dentre os serviços acima, quais gera mais interesse. no máximo 4");
+		servico = scanner.nextLine();
+		System.out.println();
+		servicos.getServicosDestaque().add(servico);
+			
+		for (int i = 1; i < 4; i++) {
+			System.out.println("Possui mais serviços? ('Sim' ou 'Não')");
+			opcaoS = scanner.nextLine();
+			System.out.println();
+				
+			if(opcaoS == "Sim") {
+				System.out.println("Qual serviço?");
+				servico = scanner.nextLine();
+				System.out.println();
+					
+				servicos.getServicosDestaque().add(servico);
+					
+			}else if(opcaoS == "Não") {
+				break;
+			}
+		}
+
+		return servicos;
 	}
 
 	public static void editarPacote(Scanner scanner) {
-		//TODO editar pacote
 		ArrayList<PacoteViagem> pacotes = listaPacotes(scanner);
-		
+		if (pacotes == null) {
+			System.out.println("Não existe Pacotes");
+			System.out.println();
+			return;
+		}
+
 		PacoteViagem temp = devolverPacote(scanner, pacotes);
+		if (temp == null) {
+			return;
+		}
 	}
 
 	public static void removerPacote(Scanner scanner) {
-		//TODO remover pacote
 		ArrayList<PacoteViagem> pacotes = listaPacotes(scanner);
-		
+		if (pacotes == null) {
+			System.out.println("Não existe Pacotes");
+			System.out.println();
+			return;
+		}
+
 		PacoteViagem temp = devolverPacote(scanner, pacotes);
-		
+		if (temp == null) {
+			return;
+		}
+
 		if(pacoteController.remover(temp)) {
 			System.out.println("Pacote removido");
 			System.out.println();

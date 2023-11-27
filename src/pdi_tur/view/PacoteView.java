@@ -11,7 +11,7 @@ import pdi_tur.model.passagemAerea.PassagemAerea;
 public class PacoteView { 
 
     public static void printPacotes(ArrayList<PacoteViagem> pacotes) {
-        int i = 0;
+        int i = 1;
         for (PacoteViagem pacote : pacotes) {
             System.out.println(i + " - " + pacote.getCategoria());
 
