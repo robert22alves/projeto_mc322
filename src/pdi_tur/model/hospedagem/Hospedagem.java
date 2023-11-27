@@ -56,4 +56,8 @@ public class Hospedagem{
         return servicos;
     }
 
+    public void setServicos(Servicos servicos) {
+        this.servicos = servicos;
+    }
+
 }

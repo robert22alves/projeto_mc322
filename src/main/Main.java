@@ -471,336 +471,11 @@ public class Main {
 		System.out.println("Adicionar Pacote");
 		System.out.println();
 		
-		System.out.print("Passagem Aérea = ");
-		System.out.println();
+		PassagemAerea passagemAerea = criarPassagem(scanner);
 		
-		System.out.print("Companhia Aérea - ");
-		System.out.println();
-		System.out.print("Qual seria a Companhia Aérea? (Digite o Nome)");
-		String companhiaAerea = scanner.nextLine();
-		
-		System.out.print("Opçoes de Bagagem - ");
-		System.out.println();
-		
-		System.out.println("Mochila? ('Sim' ou 'Não')");
-		System.out.println();
-		
-		String opcaoS = scanner.nextLine();
-		boolean op1 = false, op2 = false, op3 = false;
-		
-		if(opcaoS == "Sim") {
-			op1 = true;
-		}
-		
-		System.out.println("Bagagem à mão? ('Sim' ou 'Não')");
-		System.out.println();
-		
-		opcaoS = scanner.nextLine();
-		
-		if(opcaoS == "Sim") {
-			op2 = true;
-		}
-		
-		System.out.println("Bagagem para despachar? ('Sim' ou 'Não')");
-		System.out.println();
-		
-		opcaoS = scanner.nextLine();
-		
-		if(opcaoS == "Sim") {
-			op3 = true;
-		}
-		
-		Bagagens bagagem = new Bagagens(op1, op2, op3);
-		
-		System.out.println("Voo Ida - ");
-		System.out.println();
-		
-		System.out.println("Qual seria dia, mês e ano de saída de Ida? (DD/MM/AA)");
-		System.out.println();
-		
-		String saidaDate = scanner.nextLine();
-		
-		Data saida= Data.newData(saidaDate);
-		
-		System.out.println("Qual seria dia, mês e ano de chegada de Ida? (DD/MM/AA)");
-		System.out.println();
-		
-		String chegadaDate = scanner.nextLine();
-		
-		Data chegada = Data.newData(chegadaDate);
-		
-		System.out.println("Qual seria horário de saída de Ida? (HH:MM)");
-		System.out.println();
-		
-		String saidaHor = scanner.nextLine();
-		
-		Horario horaSaida= Horario.newHorario(saidaHor);
-		
-		System.out.println("Qual seria horário de chegada de Ida? (HH:MM)");
-		System.out.println();
-		
-		String chegadaHor = scanner.nextLine();
-		
-		Horario horaChegada = Horario.newHorario(chegadaHor);
-		
-		System.out.println("Qual seria duração do voo? (HH:MM)");
-		System.out.println();
-		
-		String duracaoVooHor = scanner.nextLine();
-		
-		Horario DuracaoVoo = Horario.newHorario(duracaoVooHor);
-		
-		System.out.println("Qual ID do Voo?");
-		System.out.println();
-		
-		String idVoo = scanner.nextLine();
-		
-		System.out.println("Qual seria cidade de saída?");
-		System.out.println();
-		
-		String cidadeSaida = scanner.nextLine();
-		
-		System.out.println("Qual seria aeroporto de saída?");
-		System.out.println();
-		
-		String aeroportoSaida = scanner.nextLine();
-		
-		Aeroporto aeroportoS = new Aeroporto(cidadeSaida, aeroportoSaida);
-		
-		System.out.println("Qual seria cidade de chegada?");
-		System.out.println();
-		
-		String cidadeChegada = scanner.nextLine();
-		
-		System.out.println("Qual seria aeroporto de chegada?");
-		System.out.println();
-		
-		String aeroportoChegada = scanner.nextLine();
-		
-		Aeroporto aeroportoC = new Aeroporto(cidadeChegada, aeroportoChegada);
-		
-		Voo vooIda = new Voo(saida, chegada, horaSaida, horaChegada, DuracaoVoo, idVoo, aeroportoS, aeroportoC);
-		
-		System.out.println("Voo Volta - ");
-		System.out.println();
-		
-		System.out.println("Qual seria dia, mês e ano de saída de Ida? (DD/MM/AA)");
-		System.out.println();
-		
-		saidaDate = scanner.nextLine();
-		
-		saida= Data.newData(saidaDate);
-		
-		System.out.println("Qual seria dia, mês e ano de chegada de Ida? (DD/MM/AA)");
-		System.out.println();
-		
-		chegadaDate = scanner.nextLine();
-		
-		chegada = Data.newData(chegadaDate);
-		
-		System.out.println("Qual seria horário de saída de Ida? (HH:MM)");
-		System.out.println();
-		
-		saidaHor = scanner.nextLine();
-		
-		horaSaida = Horario.newHorario(saidaHor);
-		
-		System.out.println("Qual seria horário de chegada de Ida? (HH:MM)");
-		System.out.println();
-		
-		chegadaHor = scanner.nextLine();
-		
-		horaChegada = Horario.newHorario(chegadaHor);
-	
-		System.out.println("Qual seria duração do voo? (HH:MM)");
-		System.out.println();
-		
-		duracaoVooHor = scanner.nextLine();
-		
-		DuracaoVoo = Horario.newHorario(duracaoVooHor);
-		
-		System.out.println("Qual ID do Voo?");
-		System.out.println();
-		
-		idVoo = scanner.nextLine();
-		
-		System.out.println("Qual seria cidade de saída?");
-		System.out.println();
-		
-		cidadeSaida = scanner.nextLine();
-		
-		System.out.println("Qual seria aeroporto de saída?");
-		System.out.println();
-		
-		aeroportoSaida = scanner.nextLine();
-		
-		aeroportoS = new Aeroporto(cidadeSaida, aeroportoSaida);
-		
-		System.out.println("Qual seria cidade de chegada?");
-		System.out.println();
-		
-		cidadeChegada = scanner.nextLine();
-		
-		System.out.println("Qual seria aeroporto de chegada?");
-		System.out.println();
-		
-		aeroportoChegada = scanner.nextLine();
-		
-		aeroportoC = new Aeroporto(cidadeChegada, aeroportoChegada);
-		
-		Voo vooVolta = new Voo(saida, chegada, horaSaida, horaChegada, DuracaoVoo, idVoo, aeroportoS, aeroportoC);
-		
-		PassagemAerea passagemAerea = null;
-		
-		while(true) {
-			System.out.println("Classe de Voo:");
-			System.out.println();
-			System.out.println("1. Economica");
-			System.out.println("2. Executiva");
-			System.out.println("3. Primeira Classe");
-			System.out.println();
-			System.out.println();
-			System.out.print("Escolha uma opção: ");
+		Hospedagem hospedagem = criarHospedagem(scanner);
 
-			opcao = scanner.nextInt();
-			scanner.nextLine();
-			
-			if (opcao == 1) {
-				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.ECONOMICA, vooIda, vooVolta, bagagem);
-				break;
-			} else if (opcao == 2) {
-				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.EXECUTIVA, vooIda, vooVolta, bagagem);
-				break;
-			} else if (opcao == 3){
-				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.PRIMEIRACLASSE, vooIda, vooVolta, bagagem);
-				break;
-			} else {
-				System.out.println("Opção inválida. Por favor, escolha novamente.");
-				break;	
-			}
-		}
-		
-		System.out.print("Hospedagem = ");
-		System.out.println();
-		
-		System.out.print("Nome:");
-		System.out.println();
-		
-		String nomeHospedagem = scanner.nextLine();
-		
-		System.out.print("Endereço:");
-		System.out.println();
-		
-		String enderecoHospedagem = scanner.nextLine();
-		
-		System.out.print("Localização:");
-		System.out.println();
-		
-		String localizacaoHospedagem = scanner.nextLine();
-		
-		System.out.print("Distância do Centro:");
-		System.out.println();
-		
-		String distanciaCentroHospedagem = scanner.nextLine();
-		
-		System.out.print("Classificação:");
-		System.out.println();
-		
-		int classificacaoHospedagem = scanner.nextInt();
-		scanner.nextLine();
-		
-		System.out.println("Qual seria horário de check-in? (HH:MM)");
-		System.out.println();
-		
-		String checkinHor = scanner.nextLine();
-		
-		Horario horaCheckin = Horario.newHorario(checkinHor);
-		
-		System.out.println("Qual seria horário de check-out? (HH:MM)");
-		System.out.println();
-		
-		String checkoutHor = scanner.nextLine();
-		
-		Horario horaCheckout = Horario.newHorario(checkoutHor);
-		
-		Servicos servicos = listaServicos(scanner);
-		
-		Hospedagem hospedagem = new Hospedagem (nomeHospedagem, enderecoHospedagem, localizacaoHospedagem, distanciaCentroHospedagem, classificacaoHospedagem, horaCheckin, horaCheckout, servicos);
-		
-		System.out.print("Quarto = ");
-		System.out.println();
-		
-		System.out.print("Tipo:");
-		System.out.println();
-		
-		String tipoQuarto = scanner.nextLine();
-		
-		System.out.print("Quantidade cama casal:");
-		System.out.println();
-		
-		int camaCasal = scanner.nextInt();
-		scanner.nextLine();
-		
-		System.out.print("Quantidade cama individual:");
-		System.out.println();
-		
-		int camaIndividual = scanner.nextInt();
-		scanner.nextLine();
-		
-		System.out.print("Quantidade cama para bebês:");
-		System.out.println();
-		
-		int camaBebe = scanner.nextInt();
-		scanner.nextLine();
-		
-		System.out.print("Área do quarto:");
-		System.out.println();
-		
-		int superficie = scanner.nextInt();
-		scanner.nextLine();
-		
-		ArrayList<String> detalhes = new ArrayList<>();
-		
-		System.out.print("O quarto possui detalhes? TV de tela plana, Ar condicionado, Frigobar, Aquecimento, Wi-Fi grátis...('Sim' ou 'Não'):");
-		System.out.println();
-		
-		opcaoS = scanner.nextLine();
-		
-		String detalhe;
-		
-		Quarto quarto = null;
-		
-		if(opcaoS == "Não") {
-			quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, new ArrayList<>());
-		}else if(opcaoS == "Sim") {
-			System.out.print("Qual detalhe?");
-			System.out.println();
-			
-			detalhe = scanner.nextLine();
-			
-			detalhes.add(detalhe);
-			
-			while(true) {
-				System.out.print("Possui mais detalhes? ('Sim' ou 'Não')");
-				System.out.println();
-				
-				opcaoS = scanner.nextLine();
-				
-				if(opcaoS == "Sim") {
-					System.out.print("Qual detalhe?");
-					System.out.println();
-					
-					detalhe = scanner.nextLine();
-					
-					detalhes.add(detalhe);
-					
-				}else if(opcaoS == "Não") {
-					quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, detalhes);
-					break;
-					
-				}
-			}
-		}
+		Quarto quarto = criarQuarto(scanner);
 		
 		System.out.print("Destino = ");
 		System.out.println();
@@ -871,7 +546,7 @@ public class Main {
 				System.out.print("Digite uma atividade do pacote:");
 				System.out.println();
 				
-				opcaoS = scanner.nextLine();
+				String opcaoS = scanner.nextLine();
 				
 				coisas.add(opcaoS);
 				
@@ -906,7 +581,7 @@ public class Main {
 				System.out.print("Possui guia turístico? ('Sim' ou 'Não')");
 				System.out.println();
 				
-				opcaoS = scanner.nextLine();
+				String opcaoS = scanner.nextLine();
 				
 				boolean guia = false;
 				
@@ -947,6 +622,475 @@ public class Main {
 				System.out.println("Opção inválida. Por favor, escolha novamente.");
 			}
 		}
+	}
+
+	public static PassagemAerea criarPassagem(Scanner scanner) {
+		System.out.print("Passagem Aérea = ");
+		System.out.println();
+		
+		System.out.print("Companhia Aérea - ");
+		System.out.println();
+		System.out.print("Qual seria a Companhia Aérea? (Digite o Nome)");
+		String companhiaAerea = scanner.nextLine();
+		
+		System.out.print("Opçoes de Bagagem - ");
+		System.out.println();
+		
+		System.out.println("Mochila? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		String opcaoS = scanner.nextLine();
+		boolean op1 = false, op2 = false, op3 = false;
+		
+		if(opcaoS == "Sim") {
+			op1 = true;
+		}
+		
+		System.out.println("Bagagem à mão? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		opcaoS = scanner.nextLine();
+		
+		if(opcaoS == "Sim") {
+			op2 = true;
+		}
+		
+		System.out.println("Bagagem para despachar? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		opcaoS = scanner.nextLine();
+		
+		if(opcaoS == "Sim") {
+			op3 = true;
+		}
+		
+		Bagagens bagagem = new Bagagens(op1, op2, op3);
+		
+		Voo vooIda = criarVooIda(scanner);
+		
+		Voo vooVolta = criarVooVolta(scanner);
+		
+		PassagemAerea passagemAerea = null;
+		
+		while(true) {
+			System.out.println("Classe de Voo:");
+			System.out.println();
+			System.out.println("1. Economica");
+			System.out.println("2. Executiva");
+			System.out.println("3. Primeira Classe");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
+
+			opcao = scanner.nextInt();
+			scanner.nextLine();
+			
+			if (opcao == 1) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.ECONOMICA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 2) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.EXECUTIVA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 3){
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.PRIMEIRACLASSE, vooIda, vooVolta, bagagem);
+				break;
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
+				break;	
+			}
+		}
+
+		return passagemAerea;
+	}
+
+	public static PassagemAerea criarPassagem(Scanner scanner, Voo vooIda, Voo vooVolta){
+		System.out.print("Passagem Aérea = ");
+		System.out.println();
+		
+		System.out.print("Companhia Aérea - ");
+		System.out.println();
+		System.out.print("Qual seria a Companhia Aérea? (Digite o Nome)");
+		String companhiaAerea = scanner.nextLine();
+		
+		System.out.print("Opçoes de Bagagem - ");
+		System.out.println();
+		
+		System.out.println("Mochila? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		String opcaoS = scanner.nextLine();
+		boolean op1 = false, op2 = false, op3 = false;
+		
+		if(opcaoS == "Sim") {
+			op1 = true;
+		}
+		
+		System.out.println("Bagagem à mão? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		opcaoS = scanner.nextLine();
+		
+		if(opcaoS == "Sim") {
+			op2 = true;
+		}
+		
+		System.out.println("Bagagem para despachar? ('Sim' ou 'Não')");
+		System.out.println();
+		
+		opcaoS = scanner.nextLine();
+		
+		if(opcaoS == "Sim") {
+			op3 = true;
+		}
+
+		Bagagens bagagem = new Bagagens(op1, op2, op3);
+		
+		PassagemAerea passagemAerea = null;
+		
+		while(true) {
+			System.out.println("Classe de Voo:");
+			System.out.println();
+			System.out.println("1. Economica");
+			System.out.println("2. Executiva");
+			System.out.println("3. Primeira Classe");
+			System.out.println();
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
+
+			opcao = scanner.nextInt();
+			scanner.nextLine();
+			
+			if (opcao == 1) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.ECONOMICA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 2) {
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.EXECUTIVA, vooIda, vooVolta, bagagem);
+				break;
+			} else if (opcao == 3){
+				passagemAerea = new PassagemAerea(companhiaAerea, ClasseVoo.PRIMEIRACLASSE, vooIda, vooVolta, bagagem);
+				break;
+			} else {
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
+				break;	
+			}
+		}
+
+		return passagemAerea;
+	}
+
+	public static Voo criarVooIda(Scanner scanner) {
+		System.out.println("Voo Ida - ");
+		System.out.println();
+		
+		System.out.println("Qual seria dia, mês e ano de saída de Ida? (DD/MM/AA)");
+		System.out.println();
+		
+		String saidaDate = scanner.nextLine();
+		
+		Data saida= Data.newData(saidaDate);
+		
+		System.out.println("Qual seria dia, mês e ano de chegada de Ida? (DD/MM/AA)");
+		System.out.println();
+		
+		String chegadaDate = scanner.nextLine();
+		
+		Data chegada = Data.newData(chegadaDate);
+		
+		System.out.println("Qual seria horário de saída de Ida? (HH:MM)");
+		System.out.println();
+		
+		String saidaHor = scanner.nextLine();
+		
+		Horario horaSaida= Horario.newHorario(saidaHor);
+		
+		System.out.println("Qual seria horário de chegada de Ida? (HH:MM)");
+		System.out.println();
+		
+		String chegadaHor = scanner.nextLine();
+		
+		Horario horaChegada = Horario.newHorario(chegadaHor);
+		
+		System.out.println("Qual seria duração do voo? (HH:MM)");
+		System.out.println();
+		
+		String duracaoVooHor = scanner.nextLine();
+		
+		Horario DuracaoVoo = Horario.newHorario(duracaoVooHor);
+		
+		System.out.println("Qual ID do Voo?");
+		System.out.println();
+		
+		String idVoo = scanner.nextLine();
+		
+		System.out.println("Qual seria cidade de saída?");
+		System.out.println();
+		
+		String cidadeSaida = scanner.nextLine();
+		
+		System.out.println("Qual seria aeroporto de saída?");
+		System.out.println();
+		
+		String aeroportoSaida = scanner.nextLine();
+		
+		Aeroporto aeroportoS = new Aeroporto(cidadeSaida, aeroportoSaida);
+		
+		System.out.println("Qual seria cidade de chegada?");
+		System.out.println();
+		
+		String cidadeChegada = scanner.nextLine();
+		
+		System.out.println("Qual seria aeroporto de chegada?");
+		System.out.println();
+		
+		String aeroportoChegada = scanner.nextLine();
+		
+		Aeroporto aeroportoC = new Aeroporto(cidadeChegada, aeroportoChegada);
+		
+		return new Voo(saida, chegada, horaSaida, horaChegada, DuracaoVoo, idVoo, aeroportoS, aeroportoC);
+	}
+
+	public static Voo criarVooVolta(Scanner scanner) {
+		System.out.println("Voo Volta - ");
+		System.out.println();
+		
+		System.out.println("Qual seria dia, mês e ano de saída de Ida? (DD/MM/AA)");
+		System.out.println();
+		
+		String saidaDate = scanner.nextLine();
+		
+		Data saida = Data.newData(saidaDate);
+		
+		System.out.println("Qual seria dia, mês e ano de chegada de Ida? (DD/MM/AA)");
+		System.out.println();
+		
+		String chegadaDate = scanner.nextLine();
+		
+		Data chegada = Data.newData(chegadaDate);
+		
+		System.out.println("Qual seria horário de saída de Ida? (HH:MM)");
+		System.out.println();
+		
+		String saidaHor = scanner.nextLine();
+		
+		Horario horaSaida = Horario.newHorario(saidaHor);
+		
+		System.out.println("Qual seria horário de chegada de Ida? (HH:MM)");
+		System.out.println();
+		
+		String chegadaHor = scanner.nextLine();
+		
+		Horario horaChegada = Horario.newHorario(chegadaHor);
+	
+		System.out.println("Qual seria duração do voo? (HH:MM)");
+		System.out.println();
+		
+		String duracaoVooHor = scanner.nextLine();
+		
+		Horario DuracaoVoo = Horario.newHorario(duracaoVooHor);
+		
+		System.out.println("Qual ID do Voo?");
+		System.out.println();
+		
+		String idVoo = scanner.nextLine();
+		
+		System.out.println("Qual seria cidade de saída?");
+		System.out.println();
+		
+		String cidadeSaida = scanner.nextLine();
+		
+		System.out.println("Qual seria aeroporto de saída?");
+		System.out.println();
+		
+		String aeroportoSaida = scanner.nextLine();
+		
+		Aeroporto aeroportoS = new Aeroporto(cidadeSaida, aeroportoSaida);
+		
+		System.out.println("Qual seria cidade de chegada?");
+		System.out.println();
+		
+		String cidadeChegada = scanner.nextLine();
+		
+		System.out.println("Qual seria aeroporto de chegada?");
+		System.out.println();
+		
+		String aeroportoChegada = scanner.nextLine();
+		
+		Aeroporto aeroportoC = new Aeroporto(cidadeChegada, aeroportoChegada);
+		
+		return new Voo(saida, chegada, horaSaida, horaChegada, DuracaoVoo, idVoo, aeroportoS, aeroportoC);
+	}
+
+	public static Hospedagem criarHospedagem(Scanner scanner) {
+		System.out.print("Hospedagem = ");
+		System.out.println();
+		
+		System.out.print("Nome:");
+		System.out.println();
+		
+		String nomeHospedagem = scanner.nextLine();
+		
+		System.out.print("Endereço:");
+		System.out.println();
+		
+		String enderecoHospedagem = scanner.nextLine();
+		
+		System.out.print("Localização:");
+		System.out.println();
+		
+		String localizacaoHospedagem = scanner.nextLine();
+		
+		System.out.print("Distância do Centro:");
+		System.out.println();
+		
+		String distanciaCentroHospedagem = scanner.nextLine();
+		
+		System.out.print("Classificação:");
+		System.out.println();
+		
+		int classificacaoHospedagem = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.println("Qual seria horário de check-in? (HH:MM)");
+		System.out.println();
+		
+		String checkinHor = scanner.nextLine();
+		
+		Horario horaCheckin = Horario.newHorario(checkinHor);
+		
+		System.out.println("Qual seria horário de check-out? (HH:MM)");
+		System.out.println();
+		
+		String checkoutHor = scanner.nextLine();
+		
+		Horario horaCheckout = Horario.newHorario(checkoutHor);
+		
+		Servicos servicos = listaServicos(scanner);
+		
+		return new Hospedagem (nomeHospedagem, enderecoHospedagem, localizacaoHospedagem, distanciaCentroHospedagem, classificacaoHospedagem, horaCheckin, horaCheckout, servicos);
+	}
+
+	public static Hospedagem criarHospedagem(Scanner scanner, Servicos servicos) {
+		System.out.print("Hospedagem = ");
+		System.out.println();
+		
+		System.out.print("Nome:");
+		System.out.println();
+		
+		String nomeHospedagem = scanner.nextLine();
+		
+		System.out.print("Endereço:");
+		System.out.println();
+		
+		String enderecoHospedagem = scanner.nextLine();
+		
+		System.out.print("Localização:");
+		System.out.println();
+		
+		String localizacaoHospedagem = scanner.nextLine();
+		
+		System.out.print("Distância do Centro:");
+		System.out.println();
+		
+		String distanciaCentroHospedagem = scanner.nextLine();
+		
+		System.out.print("Classificação:");
+		System.out.println();
+		
+		int classificacaoHospedagem = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.println("Qual seria horário de check-in? (HH:MM)");
+		System.out.println();
+		
+		String checkinHor = scanner.nextLine();
+		
+		Horario horaCheckin = Horario.newHorario(checkinHor);
+		
+		System.out.println("Qual seria horário de check-out? (HH:MM)");
+		System.out.println();
+		
+		String checkoutHor = scanner.nextLine();
+		
+		Horario horaCheckout = Horario.newHorario(checkoutHor);
+		
+		return new Hospedagem (nomeHospedagem, enderecoHospedagem, localizacaoHospedagem, distanciaCentroHospedagem, classificacaoHospedagem, horaCheckin, horaCheckout, servicos);
+	}
+
+	public static Quarto criarQuarto(Scanner scanner) {
+		System.out.print("Quarto = ");
+		System.out.println();
+		
+		System.out.print("Tipo:");
+		System.out.println();
+		
+		String tipoQuarto = scanner.nextLine();
+		
+		System.out.print("Quantidade cama casal:");
+		System.out.println();
+		
+		int camaCasal = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.print("Quantidade cama individual:");
+		System.out.println();
+		
+		int camaIndividual = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.print("Quantidade cama para bebês:");
+		System.out.println();
+		
+		int camaBebe = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.print("Área do quarto:");
+		System.out.println();
+		
+		int superficie = scanner.nextInt();
+		scanner.nextLine();
+		
+		ArrayList<String> detalhes = new ArrayList<>();
+		
+		System.out.print("O quarto possui detalhes? TV de tela plana, Ar condicionado, Frigobar, Aquecimento, Wi-Fi grátis...('Sim' ou 'Não'):");
+		System.out.println();
+		
+		String opcaoS = scanner.nextLine();
+		
+		String detalhe;
+		
+		Quarto quarto = null;
+		
+		if(opcaoS == "Não") {
+			quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, new ArrayList<>());
+		}else if(opcaoS == "Sim") {
+			System.out.print("Qual detalhe?");
+			System.out.println();
+			
+			detalhe = scanner.nextLine();
+			
+			detalhes.add(detalhe);
+			
+			while(true) {
+				System.out.print("Possui mais detalhes? ('Sim' ou 'Não')");
+				System.out.println();
+				
+				opcaoS = scanner.nextLine();
+				
+				if(opcaoS == "Sim") {
+					System.out.print("Qual detalhe?");
+					System.out.println();
+					
+					detalhe = scanner.nextLine();
+					
+					detalhes.add(detalhe);
+					
+				}else if(opcaoS == "Não") {
+					quarto = new Quarto (tipoQuarto, camaCasal, camaIndividual, camaBebe, superficie, detalhes);
+				}
+			}
+		}
+
+		return quarto;
 	}
 	
 	public static Servicos listaServicos(Scanner scanner){
@@ -1473,6 +1617,55 @@ public class Main {
 		PacoteViagem temp = devolverPacote(scanner, pacotes);
 		if (temp == null) {
 			return;
+		}
+
+		System.out.println("---- Editar Pacote ----");
+		System.out.println();
+		System.out.println("1. Voo Ida");
+		System.out.println("2. Voo Volta");
+		System.out.println("3. Passagem Aérea");
+		System.out.println("4. Hospedagem");
+		System.out.println("5. Serviços do Hotel");
+		System.out.println("6. Quarto");
+		System.out.println("7. Sair");
+		System.out.println();
+		System.out.println();
+		System.out.print("Escolha uma opção: ");
+				
+		opcao = scanner.nextInt();
+		scanner.nextLine();
+
+		switch (opcao) {
+			case 1:
+				temp.getPassagemAerea().setIda(criarVooIda(scanner));
+				break;
+						
+			case 2:
+				temp.getPassagemAerea().setVolta(criarVooVolta(scanner));
+				break;
+
+			case 3:
+				temp.setPassagemAerea(criarPassagem(scanner, temp.getPassagemAerea().getIda(), temp.getPassagemAerea().getVolta()));
+				return;
+					
+			case 4:
+				temp.setHospedagem(criarHospedagem(scanner, temp.getHospedagem().getServicos()));
+				break;
+
+			case 5:
+				temp.getHospedagem().setServicos(listaServicos(scanner));
+				break;
+					
+			case 6:
+				temp.setQuarto(criarQuarto(scanner));
+				break;
+						
+			case 7:
+				return;
+
+			default:
+				System.out.println("Opção inválida. Por favor, escolha novamente.");
+				break;
 		}
 	}
 

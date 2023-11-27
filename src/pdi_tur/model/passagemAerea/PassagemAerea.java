@@ -35,6 +35,14 @@ public class PassagemAerea {
         return ida.horarioChegada;
     }
 
+    public void setIda(Voo ida) {
+        this.ida = ida;
+    }
+
+    public void setVolta(Voo volta) {
+        this.volta = volta;
+    }
+
     public Horario getDuracaoIda() {
         return ida.duracao;
     }
