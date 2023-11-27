@@ -24,7 +24,6 @@ public class Main {
 	static boolean adm = false;
 	static int opcao = 0;
 
-
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
@@ -36,8 +35,9 @@ public class Main {
 				System.out.println("2. Editar Pacote de Viagem");
 				System.out.println("3. Remover Pacote de Viagem");
 				System.out.println("4. Cadastrar Adm");
-				System.out.println("5. Fechar Sessão");
-				System.out.println("6. Sair");
+				System.out.println("5. Registrar Cidade");
+				System.out.println("6. Fechar Sessão");
+				System.out.println("7. Sair");
 				System.out.println();
 				System.out.println();
 				System.out.print("Escolha uma opção: ");
@@ -79,13 +79,16 @@ public class Main {
 						break;
 
 					case 5:
+					registrarCidade(scanner);
+						break;
+					case 6:
 						System.out.println();
 						logado = false;
 						adm = false;
 						usuario = null;
 						break;
 						
-					case 6:
+					case 7:
 						scanner.close();
 						return;
 
@@ -1495,5 +1498,22 @@ public class Main {
 		System.out.println("Não existe Pacote");
 		System.out.println();
 		return;
+	}
+
+	public static void registrarCidade(Scanner scanner) {
+		System.out.println("---- Registrar Cidade ----");
+		System.out.println();
+		System.out.print("Cidade: ");
+		String cidade = scanner.nextLine();
+		System.out.println();
+		System.out.print("Aeroporto mais próximo: ");
+		String aeroporto = scanner.nextLine();
+		Aeroporto local = new Aeroporto(cidade, aeroporto);
+
+		if (pacoteController.novaCidade(local)) {
+			System.out.println("Cidade Registrada");
+		} else {
+			System.out.println("Registro de Cidade existente");
+		}
 	}
 } 
