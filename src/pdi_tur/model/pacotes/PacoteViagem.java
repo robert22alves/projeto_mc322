@@ -40,6 +40,18 @@ public abstract class PacoteViagem implements Reservaveis{
         return destino;
     }
 
+    public void setPassagemAerea(PassagemAerea passagemAerea) {
+        this.passagemAerea = passagemAerea;
+    }
+
+    public void setHospedagem(Hospedagem hospedagem) {
+        this.hospedagem = hospedagem;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
+
     public double getPrecopp() {
         return precopp;
     }
